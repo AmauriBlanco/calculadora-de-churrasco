@@ -25,27 +25,23 @@ comidaBebidaForm.addEventListener("submit", (event) => {
     let valorCerveja = obterValorCerveja();
     let valorCarne = obterValorCarne();
     if (validacoes(pessoasBebem, convidados, valorCerveja, valorCarne)) {
-        comida();
-        bebida();
+        comida(convidados);
+        bebida(convidados, pessoasBebem);
         apresentarResposta();
         zerarCampos(comidaBebidaForm);
     }
-    console.log(validacoes(pessoasBebem, convidados, valorCerveja, valorCarne))
 });
 
-function comida() {
-    let quantidaDePessoas = quantidadeDePessoas();
+function comida(quantidadeDePessoas) {
     let valoresComidaInput = obterValoresComida();
     let valoresComidaCalculado = calcularComida(
-        quantidaDePessoas,
+        quantidadeDePessoas,
         valoresComidaInput
     );
     mostrarValoresComida(valoresComidaCalculado);
 }
 
-function bebida() {
-    let quantidaDePessoas = quantidadeDePessoas();
-    let quantidadeDePessoasBebem = quantidadeDePessoaBebem();
+function bebida(quantidaDePessoas, quantidadeDePessoasBebem) {
     let valoresBebidaInput = obterValoresBebida();
     let valoresBebidaCalculado = calcularBebida(
         quantidaDePessoas,

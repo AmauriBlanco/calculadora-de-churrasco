@@ -24,30 +24,31 @@ function verificarMultiplicador(valores) {
     let multiplicadorFrango = 0.1;
     let multiplicadorSuina = 0.1;
 
-    if (!valores.frango && !valores.suina) {
+    if (valores.frango === "" && valores.suina === "") {
         multiplicadorCarne = 0.4;
         multiplicadorFrango = 0;
         multiplicadorSuina = 0;
-
-        console.log("os dois vazios");
+        console.log("1", valores.carne);
         return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
     }
 
-    if (!valor.frango) {
+    if (valores.frango === "") {
         multiplicadorCarne = 0.25;
-        multiplicadorSuina = 0.15;
         multiplicadorFrango = 0;
-        console.log("frango vazios");
+        multiplicadorSuina = 0.15;
+        console.log("2", valor.frango);
         return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
     }
 
-    if (!valores.suina) {
+    if (valores.suina === "") {
         multiplicadorCarne = 0.25;
         multiplicadorFrango = 0.15;
         multiplicadorSuina = 0;
-        console.log("suina vazios");
+        console.log("3", valores.suina);
         return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
     }
+
+    return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
 }
 
 // Calculo quantidade
