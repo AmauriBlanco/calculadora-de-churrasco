@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+
+
+    <title>Calculadora de Churrasco - TreinaWeb</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <img src="img/logo-tw.svg" alt="Logo da TreinaWeb" height="20px">
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="titulo-pagina">Calculadora de Churrasco</h1>
+            <p class="numero-convidados"></p>
+            <form>
+                <p class="descricao-convidados">Insira quantos pessoas irão no churrasco</p>
+                <input type="number" name="convidados" id="convidados" placeholder="Ex. 35" required>
+                <div class="blocos-editaveis">
+                    <section class="comida">
+                        <h2 class="titulo-secao">Carnes</h2>
+                        <div class="campo-form">
+                            <label for="bovina">Bovina</label>
+                            <input type="text" name="bovina" id="bovina" placeholder="Valor do Kg" onkeyup="formatarMoeda(this)">
+                        </div>
+                        <div class="campo-form">
+                            <label for="frango">Frango</label>
+                            <input type="text" name="frango" id="frango" placeholder="Valor do Kg" onkeyup="formatarMoeda(this)">
+                        </div>
+                        <div class="campo-form">
+                            <label for="suina">Suina</label>
+                            <input type="text" name="suina" id="suina" placeholder="Valor do Kg" onkeyup="formatarMoeda(this)">
+                        </div>
+                    </section>
+                    <section class="bebida">
+                        <h2 class="titulo-secao">Bebidas</h2>
+                        <div class="campo-form">
+                            <label for="refri">Refrigerante (Por Litro)</label>
+                            <input type="text" name="refri" id="refri" placeholder="Valor por unidade" required onkeyup="formatarMoeda(this)">
+                        </div>
+                        <div class="campo-form">
+                            <label for="cerveja">Cerveja (Lata 355ml)</label>
+
+                            <input type="text" name="cerveja" id="cerveja" placeholder="Valor por unidade" onkeyup="formatarMoeda(this)">
+                        </div>
+                        <div class="campo-form">
+                            <label for="qtdPessoasAlcool">N. de pessoas que bebem álcool</label>
+
+                            <input type="number" name="qtdPessoasAlcool" id="qtdPessoasAlcool"
+                                placeholder="Número de pessoas">
+                        </div>
+                    </section>
+                </div>
+                <button class="btn-calcular" id="calcular">
+                    Fazer o cálculo
+                </button>
+            </form>
+            <section class="resultado-section" id="resultado">
+                <h2 class="titulo-secao">Resultado</h2>
+                <div class="campos-resposta">
+                    <table class="tabela">
+                        <tr>
+                            <th></th>
+                            <th>Quantidade</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <th>Carne para o churrasco</th>
+                            <td class="valor-resposta" id="qtd-carne"></td>
+                            <td class="valor-resposta" id="valor-carne"></td>
+                        </tr>
+                        <tr>
+                            <th>Frango necessária para o churrasco</th>
+                            <td class="valor-resposta" id="qtd-frango"></td>
+                            <td class="valor-resposta" id="valor-frango"></td>
+                        </tr>
+                        <tr>
+                            <th>Suina necessária para o churrasco</th>
+                            <td class="valor-resposta" id="qtd-suina"></td>
+                            <td class="valor-resposta" id="valor-suina"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="" class="total">Total</th>
+                            <td class="valor-resposta" id="qtd-total-comida"></td>
+                            <td class="valor-resposta" id="valor-total-comida"></td>
+                        </tr>
+                    </table>
+
+                    <table class="tabela">
+                        <tr>
+                            <th></th>
+                            <th>Quantidade</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <th>Quantidade de Refrigerante</th>
+                            <td class="valor-resposta" id="qtd-refri"></td>
+                            <td class="valor-resposta" id="valor-refri"></td>
+                        </tr>
+                        <tr>
+                            <th>Quantidade de Cerveja</th>
+                            <td class="valor-resposta" id="qtd-cerveja"></td>
+                            <td class="valor-resposta" id="valor-cerveja"></td>
+                        </tr>
+                        <tr>
+                            <th class="total">Total</th>
+                            <td></td>
+                            <td class="valor-resposta" id="valor-total-bebida"></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Site Criado Por <a href="#">Amauri Blanco</a></p>
+    </footer>
+
+    <script type="module" src="./js/script.js"></script>
+
+    <script>
+        function formatarMoeda(campoInput) {
+            var valor = campoInput.value;
+
+            valor = valor + "";
+            valor = parseInt(valor.replace(/[\D]+/g, ""));
+            valor = valor + "";
+            valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+            if (valor.length > 6) {
+                valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+            }
+
+            campoInput.value = valor;
+            if (valor == "NaN") campoInput.value = "";
+        }
+    </script>
+
+</body>
+
+</html>
