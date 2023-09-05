@@ -18,18 +18,18 @@ function calcularComida(convidados, valores) {
     };
 }
 
+let multiplicadorCarne = 0.2;
+let multiplicadorFrango = 0.1;
+let multiplicadorSuina = 0.1;
+
 // Calculo verificadores
 function verificarMultiplicador(valores) {
-    let multiplicadorCarne = 0.2;
-    let multiplicadorFrango = 0.1;
-    let multiplicadorSuina = 0.1;
-
     if (valores.frango === "" && valores.suina === "") {
         multiplicadorCarne = 0.4;
         multiplicadorFrango = 0;
         multiplicadorSuina = 0;
         console.log("1", valores.carne);
-        return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
+        return;
     }
 
     if (valores.frango === "") {
@@ -37,7 +37,7 @@ function verificarMultiplicador(valores) {
         multiplicadorFrango = 0;
         multiplicadorSuina = 0.15;
         console.log("2", valor.frango);
-        return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
+        return;
     }
 
     if (valores.suina === "") {
@@ -45,19 +45,17 @@ function verificarMultiplicador(valores) {
         multiplicadorFrango = 0.15;
         multiplicadorSuina = 0;
         console.log("3", valores.suina);
-        return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
+        return;
     }
-
-    return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
 }
 
 // Calculo quantidade
-function quantidade(convidados, multiplicador) {
+function quantidade(convidados) {
     let carne, frango, suina;
 
-    carne = convidados * multiplicador.multiplicadorCarne;
-    frango = convidados * multiplicador.multiplicadorFrango;
-    suina = convidados * multiplicador.multiplicadorSuina;
+    carne = convidados * multiplicadorCarne;
+    frango = convidados * multiplicadorFrango;
+    suina = convidados * multiplicadorSuina;
 
     return { carne, frango, suina };
 }
