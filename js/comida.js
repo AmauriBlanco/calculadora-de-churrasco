@@ -1,8 +1,11 @@
 import { stringToFloat } from "./helpers.js";
 
-function calcularComida(convidados, valores) {
+function calcularComida(quantidadeConvidados, valores) {
     let multiplicador = verificarMultiplicador(valores);
-    let quantidadesComida = quantidade(convidados, multiplicador);
+    let quantidadesComida = quantidadeDeAlimento(
+        quantidadeConvidados,
+        multiplicador
+    );
     let valorComida = valor(quantidadesComida, valores);
 
     return {
@@ -18,44 +21,43 @@ function calcularComida(convidados, valores) {
     };
 }
 
-let multiplicadorCarne = 0.2;
-let multiplicadorFrango = 0.1;
-let multiplicadorSuina = 0.1;
-
 // Calculo verificadores
 function verificarMultiplicador(valores) {
+    let multiplicadorCarne = 0.2;
+    let multiplicadorFrango = 0.1;
+    let multiplicadorSuina = 0.1;
+
     if (valores.frango === "" && valores.suina === "") {
         multiplicadorCarne = 0.4;
         multiplicadorFrango = 0;
         multiplicadorSuina = 0;
-        console.log("1", valores.carne);
-        return;
+        return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
     }
 
     if (valores.frango === "") {
         multiplicadorCarne = 0.25;
         multiplicadorFrango = 0;
         multiplicadorSuina = 0.15;
-        console.log("2", valor.frango);
-        return;
+        return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
     }
 
     if (valores.suina === "") {
         multiplicadorCarne = 0.25;
         multiplicadorFrango = 0.15;
         multiplicadorSuina = 0;
-        console.log("3", valores.suina);
-        return;
+        return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
     }
+
+    return { multiplicadorCarne, multiplicadorFrango, multiplicadorSuina };
 }
 
 // Calculo quantidade
-function quantidade(convidados) {
+function quantidadeDeAlimento(quantidadeConvidados, multiplicador) {
     let carne, frango, suina;
 
-    carne = convidados * multiplicadorCarne;
-    frango = convidados * multiplicadorFrango;
-    suina = convidados * multiplicadorSuina;
+    carne = quantidadeConvidados * multiplicador.multiplicadorCarne;
+    frango = quantidadeConvidados * multiplicador.multiplicadorFrango;
+    suina = quantidadeConvidados * multiplicador.multiplicadorSuina;
 
     return { carne, frango, suina };
 }
@@ -77,12 +79,15 @@ function valor(quantidades, valores) {
 }
 
 // Somando Totais quantidade/preço
-function total(quantidades, valores) {
+function total(quantidadeDeAlimento, valores) {
     // Valor Total
     let valor = valores.carne + valores.frango + valores.suina;
 
     // Quantidade Total
-    let quantidade = quantidades.carne + quantidades.frango + quantidades.suina;
+    let quantidade =
+        quantidadeDeAlimento.carne +
+        quantidadeDeAlimento.frango +
+        quantidadeDeAlimento.suina;
 
     return {
         valor,

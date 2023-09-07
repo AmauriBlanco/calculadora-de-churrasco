@@ -1,7 +1,7 @@
 import { stringToFloat } from "./helpers.js";
 
-function calcularBebida(convidados, valores, pessoasBebem) {
-    let quantidadeBebida = quantidade(convidados, pessoasBebem);
+function calcularBebida(quantidadeConvidados, valores, pessoasBebem) {
+    let quantidadeBebida = quantidade(quantidadeConvidados, pessoasBebem);
     let valorBebida = valor(quantidadeBebida, valores);
 
     return {
@@ -18,14 +18,14 @@ function calcularBebida(convidados, valores, pessoasBebem) {
     };
 }
 
-function quantidade(convidados, pessoasBebem) {
+function quantidade(quantidadeConvidados, pessoasBebem) {
     let refri, cerveja;
 
     // 1 litro
-    refri = (convidados - pessoasBebem) * 1;
+    refri = (quantidadeConvidados - pessoasBebem.value) * 1;
 
     // quantidade de cerveja = 4 latas de 355ml
-    cerveja = (pessoasBebem * 1.45) / 0.355;
+    cerveja = (pessoasBebem.value * 1.45) / 0.355;
 
     return { refri, cerveja };
 }

@@ -70,27 +70,22 @@ function obterValorCerveja() {
     return getElementId("cerveja").value;
 }
 
-function quantidadeDePessoas() {
+function obterQuantidadeConvidados() {
     return getElementId("convidados").value;
 }
 
-function quantidadeDePessoaBebem() {
-    return getElementId("qtdPessoasAlcool").value;
-}
-
-function obterValorCarne() {
-    return getElementId("bovina").value;
+function obterQuantidadeDePessoaBebem() {
+    return getElementId("qtdPessoasAlcool");
 }
 
 export {
     mostrarValoresComida,
     obterValoresComida,
-    quantidadeDePessoas,
+    obterQuantidadeConvidados,
     obterValoresBebida,
     mostrarValoresBebida,
-    quantidadeDePessoaBebem,
+    obterQuantidadeDePessoaBebem,
     zerarCampos,
     apresentarResposta,
     obterValorCerveja,
-    obterValorCarne,
 };

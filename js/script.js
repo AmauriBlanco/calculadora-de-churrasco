@@ -4,13 +4,12 @@ import {
     obterValoresComida,
     obterValorCerveja,
     mostrarValoresComida,
-    quantidadeDePessoas,
+    obterQuantidadeConvidados,
     obterValoresBebida,
     mostrarValoresBebida,
-    quantidadeDePessoaBebem,
+    obterQuantidadeDePessoaBebem,
     zerarCampos,
     apresentarResposta,
-    obterValorCarne,
 } from "./dom.js";
 import { validacoes, verificarValoresCampos } from "./validacoes.js";
 
@@ -20,31 +19,30 @@ verificarValoresCampos(comidaBebidaForm);
 
 comidaBebidaForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    let convidados = quantidadeDePessoas();
-    let pessoasBebem = quantidadeDePessoaBebem();
+    let quantidadeConvidados = obterQuantidadeConvidados();
+    let pessoasBebem = obterQuantidadeDePessoaBebem();
     let valorCerveja = obterValorCerveja();
-    let valorCarne = obterValorCarne();
-    if (validacoes(pessoasBebem, convidados, valorCerveja, valorCarne)) {
-        comida(convidados);
-        bebida(convidados, pessoasBebem);
+    if (validacoes(pessoasBebem, quantidadeConvidados, valorCerveja)) {
+        comida(quantidadeConvidados);
+        bebida(quantidadeConvidados, pessoasBebem);
         apresentarResposta();
         zerarCampos(comidaBebidaForm);
     }
 });
 
-function comida(quantidadeDePessoas) {
+function comida(quantidadeConvidados) {
     let valoresComidaInput = obterValoresComida();
     let valoresComidaCalculado = calcularComida(
-        quantidadeDePessoas,
+        quantidadeConvidados,
         valoresComidaInput
     );
     mostrarValoresComida(valoresComidaCalculado);
 }
 
-function bebida(quantidaDePessoas, quantidadeDePessoasBebem) {
+function bebida(quantidadeConvidados, quantidadeDePessoasBebem) {
     let valoresBebidaInput = obterValoresBebida();
     let valoresBebidaCalculado = calcularBebida(
-        quantidaDePessoas,
+        quantidadeConvidados,
         valoresBebidaInput,
         quantidadeDePessoasBebem
     );
