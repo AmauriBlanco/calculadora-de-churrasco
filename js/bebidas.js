@@ -22,7 +22,7 @@ function quantidade(quantidadeConvidados, pessoasBebem) {
     let refri, cerveja;
 
     // 1 litro
-    refri = (quantidadeConvidados - pessoasBebem.value) * 1;
+    refri = (quantidadeConvidados.value - pessoasBebem.value) * 1;
 
     // quantidade de cerveja = 4 latas de 355ml
     cerveja = (pessoasBebem.value * 1.45) / 0.355;

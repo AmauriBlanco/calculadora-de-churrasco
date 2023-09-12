@@ -55,9 +55,9 @@ function verificarMultiplicador(valores) {
 function quantidadeDeAlimento(quantidadeConvidados, multiplicador) {
     let carne, frango, suina;
 
-    carne = quantidadeConvidados * multiplicador.multiplicadorCarne;
-    frango = quantidadeConvidados * multiplicador.multiplicadorFrango;
-    suina = quantidadeConvidados * multiplicador.multiplicadorSuina;
+    carne = quantidadeConvidados.value * multiplicador.multiplicadorCarne;
+    frango = quantidadeConvidados.value * multiplicador.multiplicadorFrango;
+    suina = quantidadeConvidados.value * multiplicador.multiplicadorSuina;
 
     return { carne, frango, suina };
 }

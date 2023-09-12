@@ -10,26 +10,30 @@ import {
     obterQuantidadeDePessoaBebem,
     zerarCampos,
     apresentarResposta,
+    obterTodosOsCampos,
 } from "./dom.js";
-import { validacoes, verificarValoresCampos } from "./validacoes.js";
+import {
+    validacoes,
+    verificarValoresCampos,
+    verificarQuantidadeConvidados,
+    verificarQuantidadeBebidaAlcoolica,
+} from "./validacoes.js";
+import { formatarMoeda } from "./mascara.js";
 
-const comidaBebidaForm = document.forms[0];
+const comidaBebidaForm = obterTodosOsCampos();
+const quantidadeConvidados = obterQuantidadeConvidados();
+const pessoasBebem = obterQuantidadeDePessoaBebem();
+const valorCerveja = obterValorCerveja();
 
+// Máscara
+formatarMoeda(comidaBebidaForm);
+
+// Verificação EventListener
 verificarValoresCampos(comidaBebidaForm);
+verificarQuantidadeConvidados(convidados);
+verificarQuantidadeBebidaAlcoolica(pessoasBebem, convidados);
 
-comidaBebidaForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    let quantidadeConvidados = obterQuantidadeConvidados();
-    let pessoasBebem = obterQuantidadeDePessoaBebem();
-    let valorCerveja = obterValorCerveja();
-    if (validacoes(pessoasBebem, quantidadeConvidados, valorCerveja)) {
-        comida(quantidadeConvidados);
-        bebida(quantidadeConvidados, pessoasBebem);
-        apresentarResposta();
-        zerarCampos(comidaBebidaForm);
-    }
-});
-
+// Execução Calculo Comida
 function comida(quantidadeConvidados) {
     let valoresComidaInput = obterValoresComida();
     let valoresComidaCalculado = calcularComida(
@@ -39,6 +43,7 @@ function comida(quantidadeConvidados) {
     mostrarValoresComida(valoresComidaCalculado);
 }
 
+// Execução Cálculo Bebidas
 function bebida(quantidadeConvidados, quantidadeDePessoasBebem) {
     let valoresBebidaInput = obterValoresBebida();
     let valoresBebidaCalculado = calcularBebida(
@@ -48,3 +53,15 @@ function bebida(quantidadeConvidados, quantidadeDePessoasBebem) {
     );
     mostrarValoresBebida(valoresBebidaCalculado);
 }
+
+// Envio dos campos
+comidaBebidaForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    // Verificação alert
+    if (validacoes(pessoasBebem, valorCerveja)) {
+        comida(quantidadeConvidados);
+        bebida(quantidadeConvidados, pessoasBebem);
+        apresentarResposta();
+        zerarCampos(comidaBebidaForm);
+    }
+});

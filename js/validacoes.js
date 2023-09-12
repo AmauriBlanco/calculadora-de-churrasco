@@ -1,8 +1,8 @@
-function validacoes(pessoasBebem, convidados, valorCerveja) {
+// Validações via alert
+function validacoes(pessoasBebem, valorCerveja) {
     if (
-        verificarQuantidadeBebidaAlcoolica(pessoasBebem, convidados) &&
-        verificarQuantidadeConvidados(convidados) &&
-        verificarValorCerveja(valorCerveja, pessoasBebem)
+        verificarValorCerveja(valorCerveja, pessoasBebem) &&
+        verificarValorPessoas(valorCerveja, pessoasBebem)
     ) {
         return true;
     }
@@ -10,26 +10,42 @@ function validacoes(pessoasBebem, convidados, valorCerveja) {
 }
 
 function verificarQuantidadeBebidaAlcoolica(pessoasBebem, convidados) {
-    if (parseInt(pessoasBebem.value) > parseInt(convidados)) {
-        alert(
-            "O número de pessoas que consomem bebida alcoolica tem que ser menor ou igual a quantidade de convidados"
-        );
-        return false
-    }
-    return true;
+    pessoasBebem.addEventListener("input", () => {
+        if (parseInt(pessoasBebem.value) > parseInt(convidados.value)) {
+            pessoasBebem.setCustomValidity(
+                "O número de pessoas que bebem precisa ser menor que a quantidade de convidados"
+            );
+            return false;
+        }
+        pessoasBebem.setCustomValidity("");
+        return true;
+    });
 }
 
 function verificarQuantidadeConvidados(convidados) {
-    if (parseInt(convidados.value) < 2) {
-        alert("Voce precisa ter mais de uma pessoa para fazer o churrasco");
+    convidados.addEventListener("input", () => {
+        if (parseInt(convidados.value) < 2) {
+            convidados.setCustomValidity(
+                "Voce precisa ter mais de uma pessoa para fazer o churrasco"
+            );
+            return false;
+        }
+        convidados.setCustomValidity("");
+        return true;
+    });
+}
+
+function verificarValorCerveja(valorCerveja, pessoasBebem) {
+    if (pessoasBebem.value !== "" && valorCerveja.value === "") {
+        alert("É necessário informar o valor da bebida");
         return false;
     }
     return true;
 }
 
-function verificarValorCerveja(valorCerveja, pessoasBebem) {
-    if (pessoasBebem !== '' && valorCerveja ==='') {
-        alert("É necessário informar o valor da cerveja");
+function verificarValorPessoas(valorCerveja, pessoasBebem) {
+    if (valorCerveja.value !== "" && pessoasBebem.value === "") {
+        alert("É necessário informar a quantidade de pessoas");
         return false;
     }
     return true;
@@ -38,14 +54,19 @@ function verificarValorCerveja(valorCerveja, pessoasBebem) {
 function verificarValoresCampos(inputs) {
     for (let i = 0; i < inputs.length - 1; i++) {
         inputs[i].addEventListener("input", () => {
-            if (inputs[i].value < 1) {
+            if (inputs[i].value !== "" && inputs[i].value < 1) {
                 inputs[i].setCustomValidity("O valor precisa ser maior que 1");
                 return false;
             }
             inputs[i].setCustomValidity("");
+            return true;
         });
     }
-    return true;
 }
 
-export { validacoes, verificarValoresCampos };
+export {
+    validacoes,
+    verificarValoresCampos,
+    verificarQuantidadeConvidados,
+    verificarQuantidadeBebidaAlcoolica,
+};

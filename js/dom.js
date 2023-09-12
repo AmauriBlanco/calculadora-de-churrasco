@@ -1,8 +1,36 @@
-import {
-    getElementId,
-    insertValues,
-    insertQuatities,
-} from "./helpers.js";
+import { getElementId, insertValues, insertQuatities } from "./helpers.js";
+
+function obterValoresComida() {
+    const bovina = getElementId("bovina").value;
+    const frango = getElementId("frango").value;
+    const suina = getElementId("suina").value;
+
+    return { bovina, frango, suina };
+}
+
+function obterValorCerveja() {
+    return getElementId("cerveja");
+}
+
+function obterQuantidadeConvidados() {
+    return getElementId("convidados");
+}
+
+function obterQuantidadeDePessoaBebem() {
+    return getElementId("qtdPessoasAlcool");
+}
+
+function obterTodosOsCampos() {
+    return document.forms[0];
+}
+
+function obterValoresBebida() {
+    const refri = getElementId("refri").value;
+    const cerveja = getElementId("cerveja").value;
+    const pessoasBebem = getElementId("qtdPessoasAlcool").value;
+
+    return { refri, cerveja, pessoasBebem };
+}
 
 function mostrarValoresComida(comida) {
     // Apresentação de Valores
@@ -22,14 +50,6 @@ function mostrarValoresComida(comida) {
     );
 }
 
-function obterValoresComida() {
-    const bovina = getElementId("bovina").value;
-    const frango = getElementId("frango").value;
-    const suina = getElementId("suina").value;
-
-    return { bovina, frango, suina };
-}
-
 function mostrarValoresBebida(bebida) {
     // Apresentação Valores
 
@@ -46,36 +66,15 @@ function mostrarValoresBebida(bebida) {
     );
 }
 
-function obterValoresBebida() {
-    const refri = getElementId("refri").value;
-    const cerveja = getElementId("cerveja").value;
-    const pessoasBebem = getElementId("qtdPessoasAlcool").value;
-
-    return { refri, cerveja, pessoasBebem };
+function apresentarResposta() {
+    const resposta = getElementId("resultado");
+    resposta.style.height = "auto";
 }
 
 function zerarCampos(inputs) {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
     }
-}
-
-function apresentarResposta() {
-    const resposta = getElementId("resultado");
-
-    resposta.style.height = "auto";
-}
-
-function obterValorCerveja() {
-    return getElementId("cerveja").value;
-}
-
-function obterQuantidadeConvidados() {
-    return getElementId("convidados").value;
-}
-
-function obterQuantidadeDePessoaBebem() {
-    return getElementId("qtdPessoasAlcool");
 }
 
 export {
@@ -88,4 +87,5 @@ export {
     zerarCampos,
     apresentarResposta,
     obterValorCerveja,
+    obterTodosOsCampos,
 };
