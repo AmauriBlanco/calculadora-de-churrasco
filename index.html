@@ -28,7 +28,7 @@
         <div class="container">
             <h1 class="titulo-pagina">Calculadora de Churrasco</h1>
             <p class="numero-convidados"></p>
-            <form>
+            <form name="camposFormulario">
                 <p class="descricao-convidados">Insira quantos pessoas irão no churrasco</p>
                 <input type="number" name="convidados" id="convidados" placeholder="Ex. 35" required>
                 <div class="blocos-editaveis">
@@ -36,7 +36,7 @@
                         <h2 class="titulo-secao">Carnes</h2>
                         <div class="campo-form">
                             <label for="bovina">Bovina</label>
-                            <input type="text" name="bovina" id="bovina" placeholder="Valor do Kg">
+                            <input type="text" name="bovina" id="bovina" placeholder="Valor do Kg" required>
                         </div>
                         <div class="campo-form">
                             <label for="frango">Frango</label>
@@ -59,9 +59,9 @@
                             <input type="text" name="cerveja" id="cerveja" placeholder="Valor por unidade">
                         </div>
                         <div class="campo-form">
-                            <label for="qtdPessoasAlcool">N. de pessoas que bebem álcool</label>
+                            <label for="quantidadePessoasBebemAlcool">N. de pessoas que bebem álcool</label>
 
-                            <input type="number" name="qtdPessoasAlcool" id="qtdPessoasAlcool"
+                            <input type="number" name="quantidadePessoasBebemAlcool" id="quantidadePessoasBebemAlcool"
                                 placeholder="Número de pessoas">
                         </div>
                     </section>

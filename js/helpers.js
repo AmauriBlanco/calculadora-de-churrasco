@@ -1,4 +1,4 @@
-function stringToFloat(input) {
+function stringParaFloat(input) {
     let valorAlterado;
     valorAlterado = parseFloat(input.replace(",", "."));
     if(isNaN(valorAlterado)) {
@@ -7,26 +7,26 @@ function stringToFloat(input) {
     return valorAlterado;
 }
 
-function getElementId(nomeCampo) {
+function obterElementoID(nomeCampo) {
     return document.getElementById(nomeCampo);
 }
 
-function insertValues(elemento, valor) {
+function inserirValores(elemento, valor) {
     if(isNaN(valor) || valor == 0) {
-       return getElementId(elemento).innerText = '--'
+       return obterElementoID(elemento).innerText = '--'
     }
 
-    return (getElementId(elemento).innerText = `${currencyConverter(valor)}`);
+    return (obterElementoID(elemento).innerText = `${converterMoeda(valor)}`);
 }
 
-function insertQuatities(elemento, valor, unidade = ""){
+function inserirQuantidade(elemento, valor, unidade = ""){
     if(valor == 0) {
-        return getElementId(elemento).innerText = '--'
+        return obterElementoID(elemento).innerText = '--'
      }
-     return (getElementId(elemento).innerText = `${valor}${unidade}`);
+     return (obterElementoID(elemento).innerText = `${valor}${unidade}`);
 }
 
-function currencyConverter(valor) {
+function converterMoeda(valor) {
     const valorConvertido = new Intl.NumberFormat("pt-BR", {
         currency: "BRL",
         style: "currency",
@@ -36,4 +36,4 @@ function currencyConverter(valor) {
 
 
 
-export { stringToFloat, getElementId, insertValues, currencyConverter, insertQuatities };
+export { stringParaFloat, obterElementoID, inserirValores, converterMoeda, inserirQuantidade };

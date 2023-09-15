@@ -1,67 +1,58 @@
 import { calcularComida } from "./comida.js";
 import { calcularBebida } from "./bebidas.js";
 import {
-    obterValoresComida,
-    obterValorCerveja,
-    mostrarValoresComida,
-    obterQuantidadeConvidados,
-    obterValoresBebida,
-    mostrarValoresBebida,
-    obterQuantidadeDePessoaBebem,
+    mostrarComida,
+    mostrarBebida,
     zerarCampos,
     apresentarResposta,
-    obterTodosOsCampos,
+    obterFormulario,
 } from "./dom.js";
 import {
     validacoes,
-    verificarValoresCampos,
-    verificarQuantidadeConvidados,
-    verificarQuantidadeBebidaAlcoolica,
+    validacoesCampos,
 } from "./validacoes.js";
 import { formatarMoeda } from "./mascara.js";
 
-const comidaBebidaForm = obterTodosOsCampos();
-const quantidadeConvidados = obterQuantidadeConvidados();
-const pessoasBebem = obterQuantidadeDePessoaBebem();
-const valorCerveja = obterValorCerveja();
+const informacoesDeEntrada = obterFormulario();
 
 // Máscara
-formatarMoeda(comidaBebidaForm);
+formatarMoeda(informacoesDeEntrada);
 
-// Verificação EventListener
-verificarValoresCampos(comidaBebidaForm);
-verificarQuantidadeConvidados(convidados);
-verificarQuantidadeBebidaAlcoolica(pessoasBebem, convidados);
+//Validações de eventListener
+validacoesCampos(informacoesDeEntrada)
 
 // Execução Calculo Comida
-function comida(quantidadeConvidados) {
-    let valoresComidaInput = obterValoresComida();
-    let valoresComidaCalculado = calcularComida(
-        quantidadeConvidados,
-        valoresComidaInput
-    );
-    mostrarValoresComida(valoresComidaCalculado);
+function comida(convidados) {
+    let valoresComidaCalculado = calcularComida(convidados, informacoesDeEntrada);
+    mostrarComida(valoresComidaCalculado);
 }
 
 // Execução Cálculo Bebidas
 function bebida(quantidadeConvidados, quantidadeDePessoasBebem) {
-    let valoresBebidaInput = obterValoresBebida();
     let valoresBebidaCalculado = calcularBebida(
         quantidadeConvidados,
-        valoresBebidaInput,
+        informacoesDeEntrada,
         quantidadeDePessoasBebem
     );
-    mostrarValoresBebida(valoresBebidaCalculado);
+    mostrarBebida(valoresBebidaCalculado);
 }
 
 // Envio dos campos
-comidaBebidaForm.addEventListener("submit", (event) => {
+informacoesDeEntrada.addEventListener("submit", (event) => {
     event.preventDefault();
     // Verificação alert
-    if (validacoes(pessoasBebem, valorCerveja)) {
-        comida(quantidadeConvidados);
-        bebida(quantidadeConvidados, pessoasBebem);
+    if (
+        validacoes(
+            informacoesDeEntrada.quantidadePessoasBebemAlcool,
+            informacoesDeEntrada.cerveja
+        )
+    ) {
+        comida(informacoesDeEntrada.convidados);
+        bebida(
+            informacoesDeEntrada.convidados,
+            informacoesDeEntrada.quantidadePessoasBebemAlcool
+        );
         apresentarResposta();
-        zerarCampos(comidaBebidaForm);
+        zerarCampos(informacoesDeEntrada);
     }
 });
