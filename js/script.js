@@ -44,7 +44,8 @@ informacoesDeEntrada.addEventListener("submit", (event) => {
     if (
         validacoes(
             informacoesDeEntrada.quantidadePessoasBebemAlcool,
-            informacoesDeEntrada.cerveja
+            informacoesDeEntrada.cerveja,
+            informacoesDeEntrada
         )
     ) {
         comida(informacoesDeEntrada.convidados);
