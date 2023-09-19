@@ -22,18 +22,22 @@ formatarMoeda(informacoesDeEntrada);
 validacoesCampos(informacoesDeEntrada)
 
 // Execução Calculo Comida
-function comida(convidados) {
-    let valoresComidaCalculado = calcularComida(convidados, informacoesDeEntrada);
+function comida() {
+    let valoresComidaCalculado = calcularComida(informacoesDeEntrada);
     mostrarComida(valoresComidaCalculado);
 }
 
 // Execução Cálculo Bebidas
-function bebida(quantidadeConvidados, quantidadeDePessoasBebem) {
-    let valoresBebidaCalculado = calcularBebida(
-        quantidadeConvidados,
-        informacoesDeEntrada,
-        quantidadeDePessoasBebem
-    );
+function bebida() {
+    let valores = {
+        quantidadeConvidados: informacoesDeEntrada.convidados.value,
+        quantidadePessoasBebemCerveja: informacoesDeEntrada.quantidadePessoasBebemCerveja.value,
+        valorRefri: informacoesDeEntrada.refri.value,
+        valorCerveja: informacoesDeEntrada.cerveja.value,
+    };
+
+    let valoresBebidaCalculado = calcularBebida(valores);
+
     mostrarBebida(valoresBebidaCalculado);
 }
 
@@ -43,16 +47,13 @@ informacoesDeEntrada.addEventListener("submit", (event) => {
     // Verificação alert
     if (
         validacoes(
-            informacoesDeEntrada.quantidadePessoasBebemAlcool,
+            informacoesDeEntrada.quantidadePessoasBebemCerveja,
             informacoesDeEntrada.cerveja,
             informacoesDeEntrada
         )
     ) {
-        comida(informacoesDeEntrada.convidados);
-        bebida(
-            informacoesDeEntrada.convidados,
-            informacoesDeEntrada.quantidadePessoasBebemAlcool
-        );
+        comida();
+        bebida();
         apresentarResposta();
         zerarCampos(informacoesDeEntrada);
     }

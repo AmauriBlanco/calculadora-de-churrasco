@@ -1,50 +1,56 @@
 import { stringParaFloat } from "./helpers.js";
 
-function calcularBebida(quantidadeConvidados, valores, pessoasBebem) {
-    let quantidadeBebida = quantidade(quantidadeConvidados, pessoasBebem);
-    let valorBebida = valor(quantidadeBebida, valores);
+function calcularBebida({
+  quantidadeConvidados,
+  quantidadePessoasBebemCerveja,
+  valorRefri,
+  valorCerveja,
+}) {
+  let quantidadeBebida = quantidade(
+    quantidadeConvidados,
+    quantidadePessoasBebemCerveja
+  );
+  let valorBebida = valor(quantidadeBebida, valorRefri, valorCerveja);
 
-    return {
-        quantidades: {
-            ...quantidadeBebida,
-            ...pessoasBebem,
-        },
-        valores: {
-            ...valorBebida,
-        },
-        total: {
-            ...total(valorBebida),
-        },
-    };
+  return {
+    quantidades: {
+      ...quantidadeBebida,
+    },
+    valores: {
+      ...valorBebida,
+    },
+    total: {
+      ...total(valorBebida),
+    },
+  };
 }
 
-function quantidade(quantidadeConvidados, pessoasBebem) {
-    let refri, cerveja;
+function quantidade(quantidadeConvidados, quantidadePessoasBebemCerveja) {
+  let refri, cerveja;
 
-    // 1 litro
-    refri = (quantidadeConvidados.value - pessoasBebem.value) * 1;
+  // 1 litro
+  refri = (quantidadeConvidados - quantidadePessoasBebemCerveja) * 1;
 
-    // quantidade de cerveja = 4 latas de 355ml
-    cerveja = (pessoasBebem.value * 1.45) / 0.355;
+  // quantidade de cerveja = 4 latas de 355ml
+  cerveja = (quantidadePessoasBebemCerveja * 1.45) / 0.355;
 
-    return { refri, cerveja };
+  return { refri, cerveja };
 }
 
-function valor(quantidades, valores) {
-    let refri, cerveja;
+function valor(quantidades, valorRefri, valorCerveja) {
+  let refri, cerveja;
 
-    refri = quantidades.refri * stringParaFloat(valores.refri.value);
+  refri = quantidades.refri * stringParaFloat(valorRefri);
 
-    cerveja = quantidades.cerveja * stringParaFloat(valores.cerveja.value);
+  cerveja = quantidades.cerveja * stringParaFloat(valorCerveja);
 
-    return { refri, cerveja };
+  return { refri, cerveja };
 }
 
 function total(valores) {
-    let valor = valores.refri + valores.cerveja;
+  let valor = valores.refri + valores.cerveja;
 
-    return { valor };
+  return { valor };
 }
-
 
 export { calcularBebida };

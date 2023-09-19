@@ -32,14 +32,17 @@ function verificarValoresNegativo(campos) {
         if (campos[i].value !== "" && campos[i].value < 1) {
             console.log("foi");
             alert(`O valor de ${campos[i].name} deve ser maior que 1`);
+            return false;
         }
     }
+
+    return true;
 }
 
 // Validações via input
 function validacoesCampos(inputs) {
     verificarNumeroDePessoasBebem(
-        inputs.quantidadePessoasBebemAlcool,
+        inputs.quantidadePessoasBebemCerveja,
         inputs.convidados
     );
     verificarQuantidadeConvidados(inputs.convidados);
